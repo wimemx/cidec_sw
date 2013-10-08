@@ -338,7 +338,9 @@ function drawVisualization() {
     var offset = parseFloat({{ max }})-parseFloat({{ min }});
     offset = offset / 20;
     offset = Math.abs(offset.toFixed(2));
-
+    var upper_val = parseFloat($upper.val());
+    var lower_val = parseFloat($lower.val());
+    chart.setOption('vAxis', {'viewWindow':{'max':upper_val, 'min':lower_val}});
 
     $upper.spinner({
         min: $upper.attr('min'),
