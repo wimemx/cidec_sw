@@ -753,6 +753,7 @@ def obtenerDemanda_kw_valores(valores_kw):
                     high = valores_kw[indice]
                     prom = (low + middle + high) / 3
                     if prom > demanda_maxima:
+                        print demanda_maxima
                         demanda_maxima = prom
             else:
                 demanda_maxima = 0

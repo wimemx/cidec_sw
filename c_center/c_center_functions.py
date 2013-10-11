@@ -1929,6 +1929,7 @@ def save_historic(monthly_cutdate, building):
 
     #Se obtiene el tipo de tarifa del edificio (HM o DAC)
     if building.electric_rate.pk == 1: #Tarifa HM
+
         resultado_mensual = tarifaHM_2(building,
             monthly_cutdate.date_init,
             monthly_cutdate.date_end, month, year)
@@ -1974,6 +1975,7 @@ def save_historic(monthly_cutdate, building):
         newHistoric.save()
 
     elif building.electric_rate.pk == 2:#Tarifa DAC
+
         resultado_mensual = tarifaDAC_2(building,
             monthly_cutdate.date_init,
             monthly_cutdate.date_end, month, year)
@@ -2436,7 +2438,7 @@ def tarifa_3(building, s_date, e_date, month, year):
                 main_cu,
                 s_date.astimezone(timezone.get_current_timezone()),
                 e_date.astimezone(timezone.get_current_timezone()),
-                'kW',
+                'kW_import_sliding_window_demand',
                 300
             )
 
@@ -2455,11 +2457,11 @@ def tarifa_3(building, s_date, e_date, month, year):
                 profile_powermeter=profile_powermeter,
                 medition_date__gte=s_date,
                 medition_date__lt=e_date).\
-            values('kW_import_sliding_window_demand')
+            values('kW_import_sliding_window_demand').order_by('medition_date')
 
             kw = []
             for dat in lecturas:
-                kw.append(float(dat['electric_data__kW_import_sliding_window_demand']))
+                kw.append(float(dat['kW_import_sliding_window_demand']))
 
             demanda_max = obtenerDemanda_kw_valores(kw)
 
@@ -2479,6 +2481,7 @@ def tarifa_3(building, s_date, e_date, month, year):
     else:
         factor_carga = (float(kwh_netos) / float(
             demanda_max * periodo_horas)) * 100
+
 
     costo_energia = kwh_netos * tarifa_kwh
 

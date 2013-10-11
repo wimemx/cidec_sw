@@ -323,6 +323,7 @@ def calculateAllMonthlyReportsInt(init, end):
 
 @task(ignore_resulset=True)
 def save_historic_delay(cd_b, building):
+
     save_historic(cd_b, building)
 
 

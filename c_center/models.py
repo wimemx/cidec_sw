@@ -773,9 +773,9 @@ class T3HistoricData(models.Model):
     charge_factor = models.DecimalField(max_digits=20, decimal_places=2,
                                         null=True, blank=True, default=0)
     max_demand = models.IntegerField(null=True, blank=True)
-    KWH_rate = models.DecimalField(max_digits=20, decimal_places=2, null=True,
+    KWH_rate = models.DecimalField(max_digits=20, decimal_places=3, null=True,
                                    blank=True, default=0)
-    demand_rate = models.DecimalField(max_digits=20, decimal_places=2,
+    demand_rate = models.DecimalField(max_digits=20, decimal_places=3,
                                       null=True, blank=True, default=0)
     average_rate = models.DecimalField(max_digits=20, decimal_places=2,
                                        null=True, blank=True, default=0)

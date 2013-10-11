@@ -7372,6 +7372,7 @@ def view_cutdates(request):
 # noinspection PyArgumentList
 @login_required(login_url='/')
 def set_cutdate(request, id_cutdate):
+
     datacontext = get_buildings_context(request.user)[0]
     if request.user.is_superuser:
         empresa = request.session['main_building']
